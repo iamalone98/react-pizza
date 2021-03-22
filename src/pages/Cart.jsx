@@ -1,5 +1,7 @@
+import Header from "../components/Header/Header";
+
 const Cart = () => {
-  return <div>Cart</div>;
+  return <Header />;
 };
 
 export default Cart;
