@@ -1,8 +1,8 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 import logo from "./../../assets/img/pizza-logo.svg";
 import cart from "./../../assets/img/cart.svg";
-import { Link } from "react-router-dom";
 
 const StyledHeader = styled.div`
   border-bottom: 1px solid $gray-line;
