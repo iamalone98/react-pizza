@@ -1,8 +1,15 @@
+import { Switch, Route } from "react-router-dom";
+import { Routes } from "./router";
+
 function App() {
   return (
-    <div className="App">
-      1
-    </div>
+    <>
+      <Switch>
+        {Routes.map((route) => (
+          <Route exact {...route} />
+        ))}
+      </Switch>
+    </>
   );
 }
 
