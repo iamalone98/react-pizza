@@ -138,7 +138,7 @@ const CartPizza = ({
         id,
       })
     );
-    dispatch(setCartItems("+"));
+    dispatch(setCartItems({ operator: "+" }));
     dispatch(setCartTotal({ operator: "+", price: price }));
   };
 
@@ -149,13 +149,13 @@ const CartPizza = ({
         id,
       })
     );
-    dispatch(setCartItems("-"));
-    dispatch(setCartTotal({ operator: "-", price: price }));
+    dispatch(setCartItems({ operator: "-" }));
+    dispatch(setCartTotal({ operator: "-", count }));
   };
 
   const onHandleRemovePizza = (id) => {
     dispatch(removePizza(id));
-    dispatch(setCartItems("-"));
+    dispatch(setCartItems({ operator: "-", count }));
     dispatch(setCartTotal({ operator: "-", price: price * count }));
   };
 

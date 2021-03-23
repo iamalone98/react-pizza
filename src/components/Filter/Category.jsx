@@ -59,7 +59,7 @@ const Category = () => {
             Все
           </NavLink>
         </StyledCategoryItem>
-        {categories.map(({ id, name, type }) => (
+        {categories.map(({ id, name }) => (
           <StyledCategoryItem
             activeItem={location.pathname === `/pizzas/${id}` ? true : false}
             key={id}

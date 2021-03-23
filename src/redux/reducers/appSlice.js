@@ -13,9 +13,9 @@ const appSlice = createSlice({
       return state;
     },
     setCartItems: function (state, action) {
-      switch (action.payload) {
+      switch (action.payload.operator) {
         case '-':
-          state.cartItems -= 1;
+          state.cartItems -= action.payload.count ? action.payload.count : 1;
           break;
         case '+':
           state.cartItems += 1;

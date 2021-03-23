@@ -165,7 +165,7 @@ const Pizza = ({ id, imageUrl, name, price, sizes, types }) => {
         imageUrl,
       })
     );
-    dispatch(setCartItems("+"));
+    dispatch(setCartItems({ operator: "+" }));
     dispatch(setCartTotal({ operator: "+", price }));
   };
 
