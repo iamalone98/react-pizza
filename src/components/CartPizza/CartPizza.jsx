@@ -150,7 +150,7 @@ const CartPizza = ({
       })
     );
     dispatch(setCartItems({ operator: "-" }));
-    dispatch(setCartTotal({ operator: "-", count }));
+    dispatch(setCartTotal({ operator: "-", price }));
   };
 
   const onHandleRemovePizza = (id) => {
