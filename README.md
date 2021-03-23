@@ -1,6 +1,6 @@
 ## Демо
 
-[Перейти к демке](https://react-redux-todolist.vercel.app/)
+[Перейти к демке](https://react-pizza-umber.vercel.app/)
 
 ## Инструменты
 
