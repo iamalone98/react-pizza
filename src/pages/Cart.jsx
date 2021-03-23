@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import CartEmpty from "../components/CartPizza/CartEmpty";
 import CartPizza from "../components/CartPizza/CartPizza";
@@ -43,22 +44,25 @@ const StyledCartBottomDetails = styled.div`
 `;
 
 const Cart = () => {
-  const pizzas = null;
+  const cart = useSelector((state) => state.cart);
+  const { cartTotal, cartItems } = useSelector(({ app }) => app);
   return (
     <>
       <Header />
       <StyledContainer>
         <StyledContent>
-          {pizzas ? (
+          {cart.length ? (
             <StyledContentPizzas>
-              <CartPizza />
+              {cart.map((item) => (
+                <CartPizza key={item.id} {...item} />
+              ))}
               <StyledCartBottom>
                 <StyledCartBottomDetails>
                   <span>
-                    Всего пицц: <b>3 шт.</b>
+                    Всего пицц: <b>{cartItems} шт.</b>
                   </span>
                   <span>
-                    Сумма заказа: <b>900 ₽</b>
+                    Сумма заказа: <b>{cartTotal} ₽</b>
                   </span>
                 </StyledCartBottomDetails>
               </StyledCartBottom>

@@ -1,5 +1,8 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled, { css } from "styled-components";
+import { setCartItems, setCartTotal } from "../../redux/reducers/appSlice";
+import { addToCart } from "../../redux/reducers/cartSlice";
 
 const StyledPizza = styled.div`
   width: 280px;
@@ -105,11 +108,6 @@ const StyledPizzaBottomButton = styled.div`
       color: #fff;
     }
 
-    i {
-      background-color: #fff;
-      color: #fe5f1e;
-    }
-
     svg {
       path {
         fill: #fff;
@@ -130,7 +128,9 @@ const StyledPizzaSelectorActive = styled.li`
       : null}
 `;
 
-const Pizza = ({ imageUrl, name, price, sizes, types }) => {
+const Pizza = ({ id, imageUrl, name, price, sizes, types }) => {
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart);
   const [currentSize, setCurrentSize] = useState(0);
   const [currentType, setCurrentType] = useState(0);
 
@@ -140,6 +140,33 @@ const Pizza = ({ imageUrl, name, price, sizes, types }) => {
 
   const onSelectType = (index) => {
     setCurrentType(index);
+  };
+
+  const onHandleAddClick = ({
+    id,
+    name,
+    price,
+    currentSize,
+    currentType,
+    sizes,
+    types,
+  }) => {
+    let lastId = cartItems.length;
+
+    dispatch(
+      addToCart({
+        id: lastId,
+        name,
+        price,
+        currentSize: sizes[currentSize],
+        currentType: types[currentType] === 0 ? "тонкое" : "традиционное",
+        pizzaId: id,
+        count: 1,
+        imageUrl,
+      })
+    );
+    dispatch(setCartItems("+"));
+    dispatch(setCartTotal({ operator: "+", price }));
   };
 
   return (
@@ -185,7 +212,20 @@ const Pizza = ({ imageUrl, name, price, sizes, types }) => {
       </StyledPizzaSelector>
       <StyledPizzaBottom>
         <StyledPizzaBottomPrice>от {price} ₽</StyledPizzaBottomPrice>
-        <StyledPizzaBottomButton>
+        <StyledPizzaBottomButton
+          onClick={() =>
+            onHandleAddClick({
+              id,
+              name,
+              price,
+              currentSize,
+              currentType,
+              sizes,
+              types,
+              imageUrl,
+            })
+          }
+        >
           <svg
             width="12"
             height="12"
@@ -199,7 +239,6 @@ const Pizza = ({ imageUrl, name, price, sizes, types }) => {
             />
           </svg>
           <span>Добавить</span>
-          {/* <i>2</i> */}
         </StyledPizzaBottomButton>
       </StyledPizzaBottom>
     </StyledPizza>

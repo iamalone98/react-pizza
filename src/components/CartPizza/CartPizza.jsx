@@ -1,4 +1,8 @@
+import { useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
+import { setCartItems, setCartTotal } from "../../redux/reducers/appSlice";
+
+import { removePizza, toggleCount } from "../../redux/reducers/cartSlice";
 
 const StyledCartPizza = styled.div`
   display: flex;
@@ -117,22 +121,60 @@ const StyledCartPizzaButton = styled.div`
       : null}
 `;
 
-const CartPizza = () => {
+const CartPizza = ({
+  imageUrl,
+  name,
+  currentSize,
+  currentType,
+  count,
+  price,
+  id,
+}) => {
+  const dispatch = useDispatch();
+  const onHandleAdd = (id) => {
+    dispatch(
+      toggleCount({
+        operator: "+",
+        id,
+      })
+    );
+    dispatch(setCartItems("+"));
+    dispatch(setCartTotal({ operator: "+", price: price }));
+  };
+
+  const onHandleRemove = (id) => {
+    dispatch(
+      toggleCount({
+        operator: "-",
+        id,
+      })
+    );
+    dispatch(setCartItems("-"));
+    dispatch(setCartTotal({ operator: "-", price: price }));
+  };
+
+  const onHandleRemovePizza = (id) => {
+    dispatch(removePizza(id));
+    dispatch(setCartItems("-"));
+    dispatch(setCartTotal({ operator: "-", price: price * count }));
+  };
+
   return (
     <StyledCartPizza>
       <StyledCartImg>
-        <img
-          class="pizza-block__image"
-          src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
-          alt="Pizza"
-        />
+        <img src={imageUrl} alt="Pizza" />
       </StyledCartImg>
       <StyledCartInfo>
-        <h3>Сырный цыпленок</h3>
-        <p>тонкое тесто, 26 см.</p>
+        <h3>{name}</h3>
+        <p>
+          {currentType}, {currentSize} см.
+        </p>
       </StyledCartInfo>
       <StyledCartCount>
-        <StyledCartPizzaButton minus>
+        <StyledCartPizzaButton
+          onClick={count > 1 ? () => onHandleRemove(id) : null}
+          minus
+        >
           <svg
             width="10"
             height="10"
@@ -150,8 +192,8 @@ const CartPizza = () => {
             ></path>
           </svg>
         </StyledCartPizzaButton>
-        <b>2</b>
-        <StyledCartPizzaButton>
+        <b>{count}</b>
+        <StyledCartPizzaButton onClick={() => onHandleAdd(id)}>
           <svg
             width="10"
             height="10"
@@ -171,10 +213,10 @@ const CartPizza = () => {
         </StyledCartPizzaButton>
       </StyledCartCount>
       <StyledCartPrice>
-        <b>770 ₽</b>
+        <b>{price * count} ₽</b>
       </StyledCartPrice>
       <StyledCartRemove>
-        <StyledCartPizzaButton remove>
+        <StyledCartPizzaButton onClick={() => onHandleRemovePizza(id)} remove>
           <svg
             width="10"
             height="10"

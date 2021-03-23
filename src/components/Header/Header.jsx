@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import logo from "./../../assets/img/pizza-logo.svg";
 import cart from "./../../assets/img/cart.svg";
+import { useSelector } from "react-redux";
 
 const StyledHeader = styled.div`
   border-bottom: 1px solid $gray-line;
@@ -16,7 +17,10 @@ const StyledContainer = styled.div`
   margin: 0 auto;
 `;
 const StyledHeaderLogo = styled.div`
-  display: flex;
+  a {
+    display: flex;
+    text-decoration: none;
+  }
 
   img {
     margin-right: 15px;
@@ -64,22 +68,25 @@ const StyledDelimiter = styled.div`
 `;
 
 const Header = () => {
+  const { cartItems, cartTotal } = useSelector(({ app }) => app);
   return (
     <StyledHeader>
       <StyledContainer>
         <StyledHeaderLogo>
-          <img width="38" src={logo} alt="Pizza logo" />
-          <div>
-            <h1>React Pizza</h1>
-            <p>самая вкусная пицца во вселенной</p>
-          </div>
+          <NavLink to="/">
+            <img width="38" src={logo} alt="Pizza logo" />
+            <div>
+              <h1>React Pizza</h1>
+              <p>самая вкусная пицца во вселенной</p>
+            </div>
+          </NavLink>
         </StyledHeaderLogo>
         <StyledHeaderCart>
           <Link to="/cart">
-            <span>520 ₽</span>
+            <span>{cartTotal} ₽</span>
             <StyledDelimiter />
             <img src={cart} alt="Cart" />
-            <span>3</span>
+            <span>{cartItems}</span>
           </Link>
         </StyledHeaderCart>
       </StyledContainer>

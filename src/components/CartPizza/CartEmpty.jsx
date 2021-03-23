@@ -19,11 +19,6 @@ const StyledCartEmpty = styled.div`
     color: #777777;
   }
 
-  icon {
-    position: relative;
-    top: 2px;
-  }
-
   img {
     display: block;
     width: 300px;
@@ -34,9 +29,7 @@ const StyledCartEmpty = styled.div`
 const CartEmpty = () => {
   return (
     <StyledCartEmpty>
-      <h2>
-        Корзина пустая <icon>😕</icon>
-      </h2>
+      <h2>Корзина пустая</h2>
       <p>
         Вероятней всего, вы не заказывали ещё пиццу.
         <br />
