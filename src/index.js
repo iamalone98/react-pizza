@@ -1,10 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
-import App from "./App";
+import { store } from "./redux";
 
+import App from "./App";
 const GlobalStyled = createGlobalStyle`
 
   @font-face {
@@ -66,10 +68,12 @@ const GlobalStyled = createGlobalStyle`
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <GlobalStyled />
-      <App />
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <GlobalStyled />
+        <App />
+      </Router>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
