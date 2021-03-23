@@ -53,7 +53,7 @@ const Cart = () => {
             <StyledContentPizzas>
               <CartPizza />
               <StyledCartBottom>
-                <StyledCartBottomDetails class="cart__bottom-details">
+                <StyledCartBottomDetails>
                   <span>
                     Всего пицц: <b>3 шт.</b>
                   </span>

@@ -6,6 +6,7 @@ const categoriesSlice = createSlice({
   reducers: {
     setCategories: function (state, action) {
       state = action.payload;
+      return state;
     }
   }
 });

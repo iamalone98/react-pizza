@@ -6,6 +6,7 @@ const pizzasSlice = createSlice({
   reducers: {
     setPizzas: function (state, action) {
       state = action.payload;
+      return state;
     }
   }
 });

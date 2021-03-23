@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import Filter from "../components/Filter/Filter";
 
@@ -25,6 +26,7 @@ const StyledContentPizzas = styled.div`
 `;
 
 const Home = () => {
+  const { pizzas } = useSelector((state) => state);
   return (
     <>
       <Header />
@@ -33,7 +35,9 @@ const Home = () => {
           <Filter />
           <StyledContentHeader>Все пиццы</StyledContentHeader>
           <StyledContentPizzas>
-            <Pizza />
+            {pizzas
+              ? pizzas.map((item) => <Pizza key={item.id} {...item} />)
+              : null}
           </StyledContentPizzas>
         </StyledContent>
       </StyledContainer>

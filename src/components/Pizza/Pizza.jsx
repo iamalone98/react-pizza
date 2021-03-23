@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import { useState } from "react";
+import styled, { css } from "styled-components";
 
 const StyledPizza = styled.div`
   width: 280px;
@@ -37,12 +38,6 @@ const StyledPizzaSelector = styled.h4`
       cursor: pointer;
       font-weight: 600;
       font-size: 14px;
-      &.active {
-        background: #ffffff;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
-        border-radius: 5px;
-        cursor: auto;
-      }
     }
   }
 `;
@@ -123,28 +118,73 @@ const StyledPizzaBottomButton = styled.div`
   }
 `;
 
-const Pizza = () => {
+const StyledPizzaSelectorActive = styled.li`
+  ${(props) =>
+    props.sizeActive
+      ? css`
+          background: #ffffff;
+          box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+          border-radius: 5px;
+          cursor: auto;
+        `
+      : null}
+`;
+
+const Pizza = ({ imageUrl, name, price, sizes, types }) => {
+  const [currentSize, setCurrentSize] = useState(0);
+  const [currentType, setCurrentType] = useState(0);
+
+  const onSelectSize = (index) => {
+    setCurrentSize(index);
+  };
+
+  const onSelectType = (index) => {
+    setCurrentType(index);
+  };
+
   return (
     <StyledPizza>
-      <img
-        class="pizza-block__image"
-        src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
-        alt="Pizza"
-      />
-      <StyledPizzaTitle>Чизбургер-пицца</StyledPizzaTitle>
+      <img src={imageUrl} alt="Pizza" />
+      <StyledPizzaTitle>{name}</StyledPizzaTitle>
       <StyledPizzaSelector>
         <ul>
-          <li class="active">тонкое</li>
-          <li>традиционное</li>
+          {types.map((item, index) => {
+            if (item === 0) {
+              return (
+                <StyledPizzaSelectorActive
+                  onClick={() => onSelectType(index)}
+                  sizeActive={currentType === index ? true : false}
+                  key={item}
+                >
+                  тонкое
+                </StyledPizzaSelectorActive>
+              );
+            }
+            return (
+              <StyledPizzaSelectorActive
+                onClick={() => onSelectType(index)}
+                sizeActive={currentType === index ? true : false}
+                key={item}
+              >
+                традиционное
+              </StyledPizzaSelectorActive>
+            );
+          })}
         </ul>
         <ul>
-          <li class="active">26 см.</li>
-          <li>30 см.</li>
-          <li>40 см.</li>
+          {sizes.map((item, index) => (
+            <StyledPizzaSelectorActive
+              onClick={() => onSelectSize(index)}
+              sizeActive={currentSize === index ? true : false}
+              key={item}
+            >
+              {item} см.
+            </StyledPizzaSelectorActive>
+          ))}
         </ul>
       </StyledPizzaSelector>
       <StyledPizzaBottom>
-        <StyledPizzaBottomPrice>от 395 ₽</StyledPizzaBottomPrice>
+        <StyledPizzaBottomPrice>от {price} ₽</StyledPizzaBottomPrice>
         <StyledPizzaBottomButton>
           <svg
             width="12"
@@ -159,7 +199,7 @@ const Pizza = () => {
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
+          {/* <i>2</i> */}
         </StyledPizzaBottomButton>
       </StyledPizzaBottom>
     </StyledPizza>

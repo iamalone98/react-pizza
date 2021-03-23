@@ -1,5 +1,9 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 import styled from "styled-components";
+import { setCategories } from "./redux/reducers/categoriesSlice";
+import { setPizzas } from "./redux/reducers/pizzasSlice";
 
 import { Routes } from "./router";
 
@@ -13,6 +17,16 @@ const StyledApp = styled.div`
 `
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    fetch("http://localhost:3000/db.json")
+      .then(res => res.json())
+      .then(data => {
+        dispatch(setPizzas(data.pizzas));
+        dispatch(setCategories(data.categories));
+      })
+  }, [dispatch])
   return (
     <StyledApp>
       <Switch>
