@@ -5,6 +5,7 @@ import Filter from "../components/Filter/Filter";
 
 import Header from "../components/Header/Header";
 import Pizza from "../components/Pizza/Pizza";
+import PizzaLoader from "../components/Pizza/PizzaLoader";
 
 const StyledContainer = styled.div`
   padding: 40px 0;
@@ -37,7 +38,7 @@ const Home = () => {
           <Filter />
           <StyledContentHeader>Все пиццы</StyledContentHeader>
           <StyledContentPizzas>
-            {pizzas
+            {pizzas.length
               ? pizzasType
                 ? pizzas.map((item) => {
                     if (+item.category === +pizzasType) {
@@ -46,7 +47,9 @@ const Home = () => {
                     return null;
                   })
                 : pizzas.map((item) => <Pizza key={item.id} {...item} />)
-              : null}
+              : Array(12)
+                  .fill(0)
+                  .map(() => <PizzaLoader />)}
           </StyledContentPizzas>
         </StyledContent>
       </StyledContainer>

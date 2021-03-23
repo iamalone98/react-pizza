@@ -18,6 +18,14 @@ const StyledApp = styled.div`
   max-width: 1400px;
   min-width: 700px
 `
+const StyledFailedRoute = styled.h1`
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height: 90vh;
+  font-size: 132px;
+  text-align:center;
+`;
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +34,7 @@ function App() {
     fetch(`${HOSTNAME}/db.json`)
       .then(res => res.json())
       .then(data => {
-        dispatch(setPizzas(sortPizzas(data.pizzas, sortType)));
+        setTimeout(() => dispatch(setPizzas(sortPizzas(data.pizzas, sortType))), 1000);
         dispatch(setCategories(data.categories));
       })
   }, [dispatch, sortType])
@@ -36,6 +44,9 @@ function App() {
         {Routes.map((route) => (
           <Route exact key={route.path} {...route} />
         ))}
+        <Route>
+          <StyledFailedRoute>404</StyledFailedRoute>
+        </Route>
       </Switch>
     </StyledApp>
   );
