@@ -29,7 +29,6 @@ const StyledContentPizzas = styled.div`
 const Home = () => {
   const { pizzas } = useSelector((state) => state);
   const { pizzasType } = useParams();
-  console.log(pizzasType);
   return (
     <>
       <Header />

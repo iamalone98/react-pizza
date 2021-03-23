@@ -6,6 +6,7 @@ import { setCategories } from "./redux/reducers/categoriesSlice";
 import { setPizzas } from "./redux/reducers/pizzasSlice";
 
 import { Routes } from "./router";
+import { HOSTNAME } from "./router/urls";
 
 const StyledApp = styled.div`
   width: calc(100vw - 100px);
@@ -20,7 +21,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch("http://localhost:3000/db.json")
+    fetch(`${HOSTNAME}db.json`)
       .then(res => res.json())
       .then(data => {
         dispatch(setPizzas(data.pizzas));

@@ -6,49 +6,51 @@ import { createGlobalStyle } from "styled-components";
 
 import { store } from "./redux";
 
+import { HOSTNAME } from "./router/urls";
+
 import App from "./App";
 const GlobalStyled = createGlobalStyle`
 
   @font-face {
     font-family: 'Proxima Nova';
-    src: url('http://localhost:3000/fonts/ProximaNova-Black.eot');
-    src: local('http://localhost:3000/fonts/Proxima Nova Black'), local('ProximaNova-Black'),
-      url('http://localhost:3000/fonts/ProximaNova-Black.eot?#iefix') format('embedded-opentype'),
-      url('http://localhost:3000/fonts/ProximaNova-Black.woff') format('woff'),
-      url('http://localhost:3000/fonts/ProximaNova-Black.ttf') format('truetype');
+    src: url('${HOSTNAME}fonts/ProximaNova-Black.eot');
+    src: local('${HOSTNAME}fonts/Proxima Nova Black'), local('ProximaNova-Black'),
+      url('${HOSTNAME}fonts/ProximaNova-Black.eot?#iefix') format('embedded-opentype'),
+      url('${HOSTNAME}fonts/ProximaNova-Black.woff') format('woff'),
+      url('${HOSTNAME}fonts/ProximaNova-Black.ttf') format('truetype');
     font-weight: 900;
     font-style: normal;
   }
 
   @font-face {
     font-family: 'Proxima Nova';
-    src: url('http://localhost:3000/fonts/ProximaNova-Bold.eot');
-    src: local('http://localhost:3000/fonts/Proxima Nova Bold'), local('ProximaNova-Bold'),
-      url('http://localhost:3000/fonts/ProximaNova-Bold.eot?#iefix') format('embedded-opentype'),
-      url('http://localhost:3000/fonts/ProximaNova-Bold.woff') format('woff'),
-      url('http://localhost:3000/fonts/ProximaNova-Bold.ttf') format('truetype');
+    src: url('${HOSTNAME}fonts/ProximaNova-Bold.eot');
+    src: local('${HOSTNAME}fonts/Proxima Nova Bold'), local('ProximaNova-Bold'),
+      url('${HOSTNAME}fonts/ProximaNova-Bold.eot?#iefix') format('embedded-opentype'),
+      url('${HOSTNAME}fonts/ProximaNova-Bold.woff') format('woff'),
+      url('${HOSTNAME}fonts/ProximaNova-Bold.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
   }
 
   @font-face {
     font-family: 'Proxima Nova';
-    src: url('http://localhost:3000/fonts/ProximaNova-Regular.eot');
-    src: local('http://localhost:3000/fonts/Proxima Nova Regular'), local('ProximaNova-Regular'),
-      url('http://localhost:3000/fonts/ProximaNova-Regular.eot?#iefix') format('embedded-opentype'),
-      url('http://localhost:3000/fonts/ProximaNova-Regular.woff') format('woff'),
-      url('http://localhost:3000/fonts/ProximaNova-Regular.ttf') format('truetype');
+    src: url('${HOSTNAME}fonts/ProximaNova-Regular.eot');
+    src: local('${HOSTNAME}fonts/Proxima Nova Regular'), local('ProximaNova-Regular'),
+      url('${HOSTNAME}fonts/ProximaNova-Regular.eot?#iefix') format('embedded-opentype'),
+      url('${HOSTNAME}fonts/ProximaNova-Regular.woff') format('woff'),
+      url('${HOSTNAME}fonts/ProximaNova-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
 
   @font-face {
     font-family: 'Proxima Nova';
-    src: url('http://localhost:3000/fonts/ProximaNova-Extrabld.eot');
-    src: local('http://localhost:3000/fonts/Proxima Nova Extrabold'), local('ProximaNova-Extrabld'),
-      url('http://localhost:3000/fonts/ProximaNova-Extrabld.eot?#iefix') format('embedded-opentype'),
-      url('http://localhost:3000/fonts/ProximaNova-Extrabld.woff') format('woff'),
-      url('http://localhost:3000/fonts/ProximaNova-Extrabld.ttf') format('truetype');
+    src: url('${HOSTNAME}fonts/ProximaNova-Extrabld.eot');
+    src: local('${HOSTNAME}fonts/Proxima Nova Extrabold'), local('ProximaNova-Extrabld'),
+      url('${HOSTNAME}fonts/ProximaNova-Extrabld.eot?#iefix') format('embedded-opentype'),
+      url('${HOSTNAME}fonts/ProximaNova-Extrabld.woff') format('woff'),
+      url('${HOSTNAME}fonts/ProximaNova-Extrabld.ttf') format('truetype');
     font-weight: 800;
     font-style: normal;
   }
