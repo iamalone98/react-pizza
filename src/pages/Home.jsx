@@ -22,9 +22,15 @@ const StyledContentHeader = styled.h2`
   font-size: 28px;
 `;
 const StyledContentPizzas = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  justify-items: center;
+  @media screen and (max-width: 1360px) {
+    grid-template-columns: 33.3333333333% 33.3333333333% 33.3333333333%;
+  }
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: 50% 50%;
+  }
 `;
 
 const Home = () => {
