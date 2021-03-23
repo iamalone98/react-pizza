@@ -1,7 +1,24 @@
-import styled from "styled-components";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styled, { css } from "styled-components";
+
+import { setSortType } from "./../../redux/reducers/appSlice";
 
 const StyledSort = styled.div`
   position: relative;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  ${(props) =>
+    props.active
+      ? css`
+          svg {
+            transform: rotate(180deg);
+          }
+        `
+      : null}
 `;
 
 const StyledSortPopup = styled.div`
@@ -17,21 +34,25 @@ const StyledSortPopup = styled.div`
 
   ul {
     overflow: hidden;
-    li {
-      padding: 12px 20px;
-      cursor: pointer;
-
-      &.active,
-      &:hover {
-        background: rgba(254, 95, 30, 0.05);
-      }
-
-      &.active {
-        font-weight: bold;
-        color: #fe5f1e;
-      }
-    }
   }
+`;
+
+const StyledSortPopupItem = styled.li`
+  padding: 12px 20px;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(254, 95, 30, 0.05);
+  }
+
+  ${(props) =>
+    props.activeItem
+      ? css`
+          font-weight: bold;
+          color: #fe5f1e;
+          background: rgba(254, 95, 30, 0.05);
+        `
+      : null}
 `;
 
 const StyledSortLabel = styled.div`
@@ -54,8 +75,36 @@ const StyledSortLabel = styled.div`
 `;
 
 const Sort = () => {
+  const sorts = [
+    {
+      id: 0,
+      text: "популярности",
+      field: "rating",
+    },
+    {
+      id: 1,
+      text: "цене",
+      field: "price",
+    },
+    {
+      id: 2,
+      text: "алфавиту",
+      field: "name",
+    },
+  ];
+  const [showPopup, setShowPopup] = useState(false);
+  const dispatch = useDispatch();
+  const sortType = useSelector(({ app }) => app.sortType);
+  const onSetSort = (field) => {
+    dispatch(setSortType(field));
+  };
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
   return (
-    <StyledSort>
+    <StyledSort active={showPopup ? true : false} onClick={togglePopup}>
       <StyledSortLabel>
         <svg
           width="10"
@@ -70,15 +119,23 @@ const Sort = () => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span>популярности</span>
+        <span>{sorts.find((item) => sortType === item.field).text}</span>
       </StyledSortLabel>
-      <StyledSortPopup>
-        <ul>
-          <li className="active">популярности</li>
-          <li>цене</li>
-          <li>алфавиту</li>
-        </ul>
-      </StyledSortPopup>
+      {showPopup ? (
+        <StyledSortPopup>
+          <ul>
+            {sorts.map(({ id, text, field }) => (
+              <StyledSortPopupItem
+                activeItem={sortType === field ? true : false}
+                key={id}
+                onClick={() => onSetSort(field)}
+              >
+                {text}
+              </StyledSortPopupItem>
+            ))}
+          </ul>
+        </StyledSortPopup>
+      ) : null}
     </StyledSort>
   );
 };
