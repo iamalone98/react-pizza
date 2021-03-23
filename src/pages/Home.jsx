@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { useParams } from "react-router";
 import styled from "styled-components";
 import Filter from "../components/Filter/Filter";
 
@@ -27,6 +28,8 @@ const StyledContentPizzas = styled.div`
 
 const Home = () => {
   const { pizzas } = useSelector((state) => state);
+  const { pizzasType } = useParams();
+  console.log(pizzasType);
   return (
     <>
       <Header />
@@ -36,7 +39,14 @@ const Home = () => {
           <StyledContentHeader>Все пиццы</StyledContentHeader>
           <StyledContentPizzas>
             {pizzas
-              ? pizzas.map((item) => <Pizza key={item.id} {...item} />)
+              ? pizzasType
+                ? pizzas.map((item) => {
+                    if (+item.category === +pizzasType) {
+                      return <Pizza key={item.id} {...item} />;
+                    }
+                    return null;
+                  })
+                : pizzas.map((item) => <Pizza key={item.id} {...item} />)
               : null}
           </StyledContentPizzas>
         </StyledContent>

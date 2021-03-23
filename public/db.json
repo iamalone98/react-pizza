@@ -2,23 +2,28 @@
   "categories": [
     {
       "id": 0,
-      "name": "Мясная"
+      "name": "Мясные",
+      "type": "meat"
     },
     {
       "id": 1,
-      "name": "Вегетерианская"
+      "name": "Вегетарианская",
+      "type": "vegetarian"
     },
     {
       "id": 2,
-      "name": "Гриль"
+      "name": "Гриль",
+      "type": "grill"
     },
     {
       "id": 3,
-      "name": "Острые"
+      "name": "Острые",
+      "type": "sharp"
     },
     {
       "id": 4,
-      "name": "Закрытые"
+      "name": "Закрытые",
+      "type": "closed"
     }
   ],
   "pizzas": [

@@ -7,6 +7,10 @@ export const Routes = [
     component: Home
   },
   {
+    path: '/pizzas/:pizzasType',
+    component: Home
+  },
+  {
     path: '/cart',
     component: Cart
   },
