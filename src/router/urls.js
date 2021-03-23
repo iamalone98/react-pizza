@@ -1,1 +1,1 @@
-export const HOSTNAME = window.location.href;
+export const HOSTNAME = window.location.origin;

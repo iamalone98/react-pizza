@@ -21,7 +21,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch(`${HOSTNAME}db.json`)
+    fetch(`${HOSTNAME}/db.json`)
       .then(res => res.json())
       .then(data => {
         dispatch(setPizzas(data.pizzas));
